@@ -11,6 +11,8 @@ public class BuyStepdefs {
     private ProductCatalog catalog;
     private Order order;
 
+    private Product product;
+
     @Given("the store is ready to service customers")
     public void the_store_is_ready_to_service_customers() {
         catalog = new ProductCatalog();
@@ -31,6 +33,12 @@ public class BuyStepdefs {
     @Then("total should be {float}")
     public void total_should_be(double total) {
         assertEquals(total, order.getTotal());
+    }
+
+    @Then("{string} in stock should be {int}")
+    public void stock_should_be(String name,int total) {
+        Product prod = catalog.getProduct(name);
+        assertEquals(total, prod.getStock());
     }
 }
 
